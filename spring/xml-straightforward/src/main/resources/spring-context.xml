@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         https://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true"
+>
+    <!-- Params -->
+    <bean id="dbUrl" class="java.lang.String">
+        <constructor-arg value="jdbc:postgresql://localhost:5432/postgres"/>
+    </bean>
+    <bean id="dbUser" class="java.lang.String">
+        <constructor-arg value="postgres"/>
+    </bean>
+    <bean id="dbPassword" class="java.lang.String">
+        <constructor-arg value="postgres"/>
+    </bean>
+
+    <!-- Connection -->
+    <bean id="connection" class="talks.di.classes.persistence.impl.ConnectionFactory" factory-method="build">
+        <constructor-arg ref="dbUrl"/>
+        <constructor-arg ref="dbUser"/>
+        <constructor-arg ref="dbPassword"/>
+    </bean>
+
+    <!-- Repositories -->
+    <bean id="accountRepository" class="impl.talks.di.classes.persistence.AccountRepositoryPersistent">
+        <constructor-arg ref="connection"/>
+    </bean>
+    <bean id="moneyTransactionRepository"
+          class="impl.talks.di.classes.persistence.MoneyTransactionRepositoryPersistent">
+        <constructor-arg ref="connection"/>
+    </bean>
+
+    <!-- Services -->
+    <bean id="moneyTransactionFactory"
+          class="moneytransactions.services.talks.di.classes.logic.MoneyTransactionFactory"/>
+    <bean id="makePurchaseService" class="purchases.services.talks.di.classes.logic.MakePurchaseService">
+        <constructor-arg ref="accountRepository"/>
+        <constructor-arg ref="moneyTransactionRepository"/>
+        <constructor-arg ref="moneyTransactionFactory"/>
+    </bean>
+    <bean id="returnPurchaseService" class="purchases.services.talks.di.classes.logic.ReturnPurchaseService">
+        <constructor-arg ref="accountRepository"/>
+        <constructor-arg ref="moneyTransactionRepository"/>
+        <constructor-arg ref="moneyTransactionFactory"/>
+    </bean>
+
+    <!-- Business Logic -->
+    <bean id="purchasesOperation" class="talks.di.classes.logic.PurchasesOperation">
+        <constructor-arg ref="accountRepository"/>
+        <constructor-arg ref="moneyTransactionRepository"/>
+        <constructor-arg ref="makePurchaseService"/>
+        <constructor-arg ref="returnPurchaseService"/>
+    </bean>
+
+    <!-- Application -->
+    <bean class="talks.di.spring.xmlstraightforward.SpringXmlStraightforwardApplication">
+        <constructor-arg ref="purchasesOperation"/>
+    </bean>
+</beans>

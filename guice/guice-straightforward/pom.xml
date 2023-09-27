@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>talks</groupId>
+        <artifactId>di-guice</artifactId>
+        <version>${talks-di.version}</version>
+    </parent>
+
+    <artifactId>di-guice-straightforward</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>talks</groupId>
+            <artifactId>di-classes-logic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>talks</groupId>
+            <artifactId>di-classes-models</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>talks</groupId>
+            <artifactId>di-classes-persistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>talks</groupId>
+            <artifactId>di-classes-persistence-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>talks</groupId>
+            <artifactId>di-classes-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>talks</groupId>
+            <artifactId>di-shared-utils</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>talks</groupId>
+            <artifactId>di-shared-tests-logic</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>surefire.testng.verbose</name>
+                            <value>10</value>
+                        </property>
+                    </properties>
+<!--                    <includes>-->
+<!--                        <include>**/Dagger2StraightforwardApplicationMockTest.java</include>-->
+<!--                    </includes>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

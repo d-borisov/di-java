@@ -1,0 +1,15 @@
+---
+version: '3.9'
+
+# based on https://github.com/khezen/compose-postgres
+
+services:
+  postgres:
+    container_name: talks_di_postgres_container
+    image: postgres:15.3
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         https://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <bean id="accountRepository" class="org.mockito.Mockito" factory-method="mock" primary="true">
+        <constructor-arg value="talks.di.classes.persistence.AccountRepository" type="java.lang.Class"/>
+    </bean>
+    <bean id="moneyTransactionRepository" class="org.mockito.Mockito" factory-method="mock" primary="true">
+        <constructor-arg value="talks.di.classes.persistence.MoneyTransactionRepository" type="java.lang.Class"/>
+    </bean>
+</beans>

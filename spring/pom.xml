@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>talks</groupId>
+        <artifactId>di</artifactId>
+        <version>${talks-di.version}</version>
+    </parent>
+
+    <artifactId>di-spring</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>component-annotation</module>
+        <module>configuration-annotation</module>
+        <module>features</module>
+        <module>springboot</module>
+        <module>springboot-requestscope</module>
+        <module>static-autowired</module>
+        <module>static-straightforward</module>
+        <module>xml-autowired</module>
+        <module>xml-straightforward</module>
+    </modules>
+
+    <properties>
+        <spring-framework.version>5.3.29</spring-framework.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
